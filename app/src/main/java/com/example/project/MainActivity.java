@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //TODO: dovrsi ovo za prelazak na novi activity, posalji pitanja ARrayList
 //       Intent i = new Intent(this,QuestionsActivity.class);
 //       Bundle b = new Bundle();
+//       b.putInt("stranica",1);
 //       i.putExtras(b);
 //       startActivity(i);
     }
