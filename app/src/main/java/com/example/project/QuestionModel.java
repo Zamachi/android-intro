@@ -1,6 +1,9 @@
 package com.example.project;
 
-public class QuestionModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class QuestionModel implements Parcelable {
 
     private String questionTitle,answerA,answerB,answerC;
     private int questionNumber;
@@ -15,6 +18,27 @@ public class QuestionModel {
         this.answerC = answerC;
         this.questionNumber = questionNumber;
     }
+
+    protected QuestionModel(Parcel in) {
+        super();
+        questionTitle = in.readString();
+        answerA = in.readString();
+        answerB = in.readString();
+        answerC = in.readString();
+        questionNumber = in.readInt();
+    }
+
+    public static final Creator<QuestionModel> CREATOR = new Creator<QuestionModel>() {
+        @Override
+        public QuestionModel createFromParcel(Parcel in) {
+            return new QuestionModel(in);
+        }
+
+        @Override
+        public QuestionModel[] newArray(int size) {
+            return new QuestionModel[size];
+        }
+    };
 
     public int getQuestionNumber() {
         return questionNumber;
@@ -63,5 +87,19 @@ public class QuestionModel {
                 "A:" + answerA + "\n" +
                 "B:" + answerB + "\n" +
                 "C:" + answerC + "\n\n";
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(questionTitle);
+        dest.writeString(answerA);
+        dest.writeString(answerB);
+        dest.writeString(answerC);
+        dest.writeInt(questionNumber);
     }
 }

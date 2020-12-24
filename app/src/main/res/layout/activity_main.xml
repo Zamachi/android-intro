@@ -36,6 +36,13 @@
                 android:layout_marginTop="24dp"
                 android:text="@string/zapocni_kviz" />
 
+            <Button
+                android:id="@+id/pregledaj_klase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Pregledajte sve klase" />
+
             <TextView
                 android:id="@+id/rezultati"
                 android:layout_width="wrap_content"

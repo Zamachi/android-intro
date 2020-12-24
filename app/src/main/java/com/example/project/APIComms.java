@@ -24,22 +24,8 @@ public class APIComms {
             protected String doInBackground(String... strings) {
                 String response="";
                 try {
-                    URL link = new URL(strings[0]);
-                    HttpsURLConnection nova_veza = (HttpsURLConnection) link.openConnection();
-                    nova_veza.setDoInput(true);
-                    nova_veza.connect();
-
-                    BufferedReader br = new BufferedReader(new InputStreamReader(nova_veza.getInputStream()));
-
-                    String red;
-                    while( (red = br.readLine()) != null ){
-                        response += red + "\n";
-                    }
-
-                    br.close();
-                    nova_veza.disconnect();
-
-                    return parseHTML(response);
+                    response = readFromURL(strings[0]);
+                    return parseHTML(response,0,0);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -53,11 +39,66 @@ public class APIComms {
 
             @Override
             protected void onPostExecute(String s) {
-        //TODO: OVDE TREBA ODRADITI NESTO
+                parseResultString(s,pitanja);
                 super.onPostExecute(s);
             }
         };
         task.execute(url);
+    }
+
+    public static void getClassIntrospection(ArrayList<ClassesModel> klase , String url, TextView rezultati){
+        AsyncTask<String,Void,String> task = new AsyncTask<String, Void, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+                String response="";
+                try {
+                    response = readFromURL(strings[0]);
+
+                    String resenje = "";
+                    for(int i=3; i<24; i++) {
+                        resenje += parseHTML(response, i, 1);
+                    }
+                    return resenje;
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                return "Doslo je do neke neocekivane greske!";
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                rezultati.setText(s);
+                super.onPostExecute(s);
+            }
+        };
+        task.execute(url);
+    }
+
+    private static String readFromURL(String url) throws IOException {
+        String response = "";
+
+        URL link = new URL(url);
+        HttpsURLConnection nova_veza = (HttpsURLConnection) link.openConnection();
+        nova_veza.setDoInput(true);
+        nova_veza.connect();
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(nova_veza.getInputStream()));
+
+        String red;
+        while( (red = br.readLine()) != null ){
+            response += red + "\n";
+        }
+
+        br.close();
+        nova_veza.disconnect();
+
+
+        return response;
     }
 
     private static String parseResultString(String s, ArrayList<QuestionModel> pitanja) {
@@ -86,7 +127,6 @@ public class APIComms {
                     break;
             }
             if(lista.size() == 4){
-                System.out.println("Stancaj objekat");
                 pitanja.add(new QuestionModel( lista.get(0), lista.get(1), lista.get(2), lista.get(3), questionNumber ) );
                 questionNumber++;
                 lista.clear();
@@ -102,15 +142,20 @@ public class APIComms {
         return rezultat;
     }
 
-    public static String parseHTML(String string_to_parse) throws JSONException {
+    public static String parseHTML(String string_to_parse, int index, int kontrolna_cifra) throws JSONException {
 
-        String jsonString = parseJSON(new JSONObject(string_to_parse));
+        String jsonString = kontrolna_cifra != 1 ? parseJSONQuestions(new JSONObject(string_to_parse)) : parseJSONClasses(new JSONObject(string_to_parse),index);
 
         return Html.fromHtml(jsonString).toString();
     }
 
-    public static String parseJSON(JSONObject json) throws JSONException {
+    public static String parseJSONQuestions(JSONObject json) throws JSONException {
 
         return json.getJSONObject("mobileview").getJSONArray("sections").getJSONObject(2).getString("text");
+    }
+
+    public static String parseJSONClasses(JSONObject json, int index) throws JSONException {
+
+        return json.getJSONObject("mobileview").getJSONArray("sections").getJSONObject(index).getString("text");
     }
 }
