@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Question No. 1"
+        android:text="@string/question_no"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +21,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Question:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionNumber" />
@@ -45,7 +44,7 @@
                 android:id="@+id/A"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Answer A">
+                android:text="@string/a">
 
             </RadioButton>
 
@@ -53,7 +52,7 @@
                 android:id="@+id/B"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Answer B">
+                android:text="@string/b">
 
             </RadioButton>
 
@@ -61,7 +60,7 @@
                 android:id="@+id/C"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Answer C">
+                android:text="@string/c">
 
             </RadioButton>
 
@@ -71,47 +70,33 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Next question"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.875"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pitanja" />
-
-    <Button
         android:id="@+id/previous"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="previous question"
+        android:text="@string/previous_question"
         app:layout_constraintEnd_toStartOf="@+id/next"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pitanja" />
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="0dp"
+    <Button
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/next_question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/previous"
+        app:layout_constraintTop_toBottomOf="@+id/pitanja" />
+
+    <Button
+        android:id="@+id/finish_quiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/final_question"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/next">
-
-        <LinearLayout
-            android:id="@+id/test"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/aopsd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/previous" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,14 +2,18 @@ package com.example.project;
 
 import android.os.AsyncTask;
 import android.text.Html;
+import android.view.View;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.annotation.Documented;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -46,37 +50,12 @@ public class APIComms {
         task.execute(url);
     }
 
-    public static void getClassIntrospection(ArrayList<ClassesModel> klase , String url, TextView rezultati){
-        AsyncTask<String,Void,String> task = new AsyncTask<String, Void, String>() {
-            @Override
-            protected String doInBackground(String... strings) {
-                String response="";
-                try {
-                    response = readFromURL(strings[0]);
+    public static void getClassIntrospection(ArrayList<ClassesModel> klase , String url, WebView rezultati){
 
-                    String resenje = "";
-                    for(int i=3; i<24; i++) {
-                        resenje += parseHTML(response, i, 1);
-                    }
-                    return resenje;
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+    }
 
-                return "Doslo je do neke neocekivane greske!";
-            }
+    private static void getWebsite(String url) {
 
-            @Override
-            protected void onPostExecute(String s) {
-                rezultati.setText(s);
-                super.onPostExecute(s);
-            }
-        };
-        task.execute(url);
     }
 
     private static String readFromURL(String url) throws IOException {
@@ -146,7 +125,7 @@ public class APIComms {
 
         String jsonString = kontrolna_cifra != 1 ? parseJSONQuestions(new JSONObject(string_to_parse)) : parseJSONClasses(new JSONObject(string_to_parse),index);
 
-        return Html.fromHtml(jsonString).toString();
+        return  kontrolna_cifra != 1 ? Html.fromHtml(jsonString).toString() : jsonString;
     }
 
     public static String parseJSONQuestions(JSONObject json) throws JSONException {
@@ -156,6 +135,9 @@ public class APIComms {
 
     public static String parseJSONClasses(JSONObject json, int index) throws JSONException {
 
-        return json.getJSONObject("mobileview").getJSONArray("sections").getJSONObject(index).getString("text");
+       String sadrzaj = json.getJSONObject("mobileview").getJSONArray("sections").getJSONObject(index).getString("text");
+
+
+       return sadrzaj;
     }
 }

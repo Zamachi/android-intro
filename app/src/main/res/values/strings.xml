@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Project</string>
-    <string name="zapocni_kviz">Zapocni kviz</string>
+    <string name="zapocni_kviz">Start the quiz</string>
+    <string name="question_no">Question No.</string>
+    <string name="a">A:</string>
+    <string name="b">B:</string>
+    <string name="c">C:</string>
+    <string name="next_question">Next<br></br>question</string>
+    <string name="previous_question">previous<br></br>question</string>
+    <string name="final_question">Finish<br></br>quiz</string>
 </resources>

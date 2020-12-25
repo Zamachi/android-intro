@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Test">
-        <activity android:name=".ClassInspectionScreen"></activity>
+        <activity android:name=".QuizResult"></activity>
+        <activity android:name=".ClassInspectionScreen" />
         <activity android:name=".QuestionsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
