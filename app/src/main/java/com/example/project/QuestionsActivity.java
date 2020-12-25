@@ -1,5 +1,6 @@
 package com.example.project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -34,7 +35,51 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
 
-        initializeComponents();
+        if(savedInstanceState == null) {
+            initializeComponents();
+        }
+        else{
+            initializeComponents(savedInstanceState);
+        }
+    }
+
+    private void initializeComponents(Bundle savedInstanceState) {
+
+        pitanja = savedInstanceState.getParcelableArrayList("pitanja");
+        broj_stranice = (int) savedInstanceState.getInt("broj_stranice");
+
+        next = (Button) findViewById(R.id.next);
+        next.setOnClickListener(this);
+        previous = (Button) findViewById(R.id.previous);
+        previous.setOnClickListener(this);
+        finish_quiz = (Button) findViewById(R.id.finish_quiz);
+        finish_quiz.setOnClickListener(this);
+        finish_quiz.setVisibility(View.INVISIBLE);
+        finish_quiz.setEnabled(false);
+
+        A = (RadioButton) findViewById(R.id.A);
+        A.setOnClickListener(this);
+        B = (RadioButton) findViewById(R.id.B);
+        B.setOnClickListener(this);
+        C = (RadioButton) findViewById(R.id.C);
+        C.setOnClickListener(this);
+
+        questionNumber = (TextView) findViewById(R.id.questionNumber);
+        question = (TextView) findViewById(R.id.question);
+
+        odabraniOdgovor = null;
+
+        odabrani_odgovori = savedInstanceState.getStringArrayList("odabrani_odgovori");
+        pitanja_odgovori = (RadioGroup)findViewById(R.id.pitanja_odgovori);
+        updateQuestions(broj_stranice);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putStringArrayList("odabrani_odgovori",odabrani_odgovori);
+        outState.putInt("broj_stranice",broj_stranice);
+        outState.putParcelableArrayList("pitanja",pitanja);
     }
 
     private void initializeComponents() {
@@ -130,7 +175,7 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
         switch (i){
             case (-1):
                 odabrani_odgovori.remove(odabrani_odgovori.size()-1);
-                this.odabraniOdgovor.setChecked(false);//TODO: vraca exception java.lang.NullPointerException: Attempt to invoke virtual method 'void android.widget.RadioButton.setChecked(boolean)' on a null object reference kada se klikne back, a nijedan odg. nije selektovan.
+                //this.odabraniOdgovor.setChecked(false);//TODO: vraca exception java.lang.NullPointerException: Attempt to invoke virtual method 'void android.widget.RadioButton.setChecked(boolean)' on a null object reference kada se klikne back, a nijedan odg. nije selektovan.
                 this.odabraniOdgovor = null;
                 this.broj_stranice--;
                 break;

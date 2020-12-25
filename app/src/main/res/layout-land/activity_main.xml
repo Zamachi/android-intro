@@ -43,14 +43,6 @@
                 android:layout_gravity="center"
                 android:text="Pregledajte sve klase" />
 
-            <TextView
-                android:id="@+id/rezultati"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="32dp"
-                android:text="Test" />
-
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
