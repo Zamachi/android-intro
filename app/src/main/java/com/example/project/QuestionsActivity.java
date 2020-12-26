@@ -153,6 +153,7 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
                 posalji(-1);
                 break;
             case R.id.finish_quiz:
+                odabrani_odgovori.add("" + odabraniOdgovor.getText().charAt(0));
                 Intent i = new Intent(this, QuizResult.class);
                 Bundle b = new Bundle();
                 b.putStringArrayList("odabrani_odgovori",odabrani_odgovori);

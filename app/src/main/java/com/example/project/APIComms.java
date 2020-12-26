@@ -13,6 +13,9 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -46,7 +49,7 @@ public class APIComms {
         task.execute(url);
     }
 
-    public static void getQClassAnswers(TextView rezultati, String url){
+    public static void getQClassAnswers(ArrayList<ClassesModel> rezultati, String url, TextView asd,ArrayList<String> odabrani_odgovori, ClassesModel odabrana_klasa){
         AsyncTask<String,Void,String> task = new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... strings) {
@@ -67,11 +70,142 @@ public class APIComms {
 
             @Override
             protected void onPostExecute(String s) {
-                rezultati.setText(s);
+                Pattern pattern = Pattern.compile("[A-Z][a-z]+(Any|0-6|[0-7]){3}");
+                Pattern ime = Pattern.compile("[A-Z][a-z]+");
+                Pattern parametar = Pattern.compile("(Any|0-6|[0-9]){1}");
+
+                Matcher matcher = pattern.matcher(s);
+                Matcher matcherIme;
+                Matcher matcherParametar;
+
+                String class_name, combat, magic,stealth, klasa;
+                String resenje = "";
+                int redni_broj = 0;
+                while(matcher.find()){
+                    klasa = matcher.group(0);
+
+                    matcherIme = ime.matcher(klasa);
+                    matcherIme.find();
+
+                    class_name = matcherIme.group(0);
+
+                    matcherParametar = parametar.matcher(klasa);
+                    matcherParametar.find();
+                    combat = matcherParametar.group(0);
+                    matcherParametar.find();
+                    magic = matcherParametar.group(0);
+                    matcherParametar.find();
+                    stealth = matcherParametar.group(0);
+
+                    rezultati.add(new ClassesModel(class_name,combat,magic,stealth));
+                    //resenje += rezultati.get(redni_broj++).toString();
+                }
+                pronadjiKlasu(odabrani_odgovori,rezultati, odabrana_klasa);
+                String result = odabrana_klasa.toString() + "\n\n" + Arrays.toString(odabrani_odgovori.toArray());
+                asd.setText(result);
                 super.onPostExecute(s);
             }
         };
         task.execute(url);
+    }
+
+    private static ClassesModel pronadjiKlasu(ArrayList<String> odabrani_odgovori, ArrayList<ClassesModel> rezultati, ClassesModel odabrana_klasa) {
+        int A=0,B=0,C=0;
+        for (String odgovor: odabrani_odgovori
+             ) {
+            if(odgovor.equals("A"))
+                A++;
+            else if(odgovor.equals("B"))
+                B++;
+            else
+                C++;
+        }
+
+        return proveriIspravnost(rezultati,A,B,C,odabrana_klasa);
+    }
+
+    private static ClassesModel proveriIspravnost(ArrayList<ClassesModel> rezultati, int a, int b, int c,ClassesModel odabrana_klasa) {
+        ClassesModel odabrani = null;
+        boolean is_pronadjen = false;
+        for (ClassesModel cm:rezultati
+             ) {
+            if(cm.getCombat().equals(""+a) && cm.getMagic().equals(""+b) && cm.getStealth().equals(""+c)){
+                odabrani = cm;
+                odabrana_klasa.setClass_name(odabrani.getClass_name());
+                odabrana_klasa.setCombat(odabrani.getCombat());
+                odabrana_klasa.setMagic(odabrani.getMagic());
+                odabrana_klasa.setStealth(odabrani.getStealth());
+                is_pronadjen = true;
+            }
+        }
+        if(!is_pronadjen){
+            if(a==7)
+                odabrani = getWarrior(rezultati, odabrana_klasa);
+            else if(b==7)
+                odabrani = getMage(rezultati, odabrana_klasa);
+            else if(c==7)
+                odabrani = getThief(rezultati, odabrana_klasa);
+            else
+                odabrani = getRogue(rezultati, odabrana_klasa);
+        }
+        return odabrani;
+    }
+
+    private static ClassesModel getRogue(ArrayList<ClassesModel> rezultati,ClassesModel odabrana_klasa) {
+        for (ClassesModel rogue:rezultati
+             ) {
+            if(rogue.getClass_name().toLowerCase().equals("rogue")){
+                odabrana_klasa.setClass_name(rogue.getClass_name());
+                odabrana_klasa.setCombat(rogue.getCombat());
+                odabrana_klasa.setMagic(rogue.getMagic());
+                odabrana_klasa.setStealth(rogue.getStealth());
+                return rogue;
+            }
+        }
+        return null;
+    }
+
+    private static ClassesModel getThief(ArrayList<ClassesModel> rezultati,ClassesModel odabrana_klasa) {
+        for (ClassesModel thief:rezultati
+        ) {
+            if(thief.getClass_name().toLowerCase().equals("thief")){
+                odabrana_klasa.setClass_name(thief.getClass_name());
+                odabrana_klasa.setCombat(thief.getCombat());
+                odabrana_klasa.setMagic(thief.getMagic());
+                odabrana_klasa.setStealth(thief.getStealth());
+                return thief;
+            }
+        }
+        return null;
+    }
+
+    private static ClassesModel getMage(ArrayList<ClassesModel> rezultati,ClassesModel odabrana_klasa) {
+        for (ClassesModel mage:rezultati
+        ) {
+            if(mage.getClass_name().toLowerCase().equals("mage")){
+                odabrana_klasa.setClass_name(mage.getClass_name());
+                odabrana_klasa.setCombat(mage.getCombat());
+                odabrana_klasa.setMagic(mage.getMagic());
+                odabrana_klasa.setStealth(mage.getStealth());
+                return mage;
+            }
+        }
+        return null;
+    }
+
+    private static ClassesModel getWarrior(ArrayList<ClassesModel> rezultati,ClassesModel odabrana_klasa) {
+        for (ClassesModel warrior:rezultati
+        ) {
+            if(warrior.getClass_name().toLowerCase().equals("warrior")){
+                odabrana_klasa.setClass_name(warrior.getClass_name());
+                odabrana_klasa.setCombat(warrior.getCombat());
+                odabrana_klasa.setMagic(warrior.getMagic());
+                odabrana_klasa.setStealth(warrior.getStealth());
+                return warrior;
+            }
+        }
+        return null;
+
     }
 
     private static String readFromURL(String url) throws IOException {

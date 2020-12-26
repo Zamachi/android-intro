@@ -14,6 +14,8 @@ public class QuizResult extends AppCompatActivity {
     ArrayList<String> odabrani_odgovori;
     TextView rezultati;
     private static String url = "https://en.uesp.net//w/api.php?action=mobileview&format=json&page=Morrowind%3AClass_Quiz&sections=1-&prop=text%7Csections";
+    ArrayList<ClassesModel> klase = new ArrayList<>();
+    ClassesModel odabranaKlasa = new ClassesModel();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +27,7 @@ public class QuizResult extends AppCompatActivity {
     private void initializeComponents() {
         rezultati = (TextView)findViewById(R.id.rezultati);
         odabrani_odgovori = getIntent().getExtras().getStringArrayList("odabrani_odgovori");
-        APIComms.getQClassAnswers(rezultati,url);
+        APIComms.getQClassAnswers(klase,url,rezultati,odabrani_odgovori,odabranaKlasa);
     }
 
 }
