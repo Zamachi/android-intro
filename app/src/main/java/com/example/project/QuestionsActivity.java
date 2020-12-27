@@ -30,11 +30,13 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
     Button finish_quiz;
     ArrayList<String> odabrani_odgovori = new ArrayList<>();
     RadioGroup pitanja_odgovori;
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
 
+        username = getIntent().getExtras().getString("inputUsername");
         if(savedInstanceState == null) {
             initializeComponents();
         }
@@ -153,13 +155,24 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
                 posalji(-1);
                 break;
             case R.id.finish_quiz:
-                odabrani_odgovori.add("" + odabraniOdgovor.getText().charAt(0));
-                Intent i = new Intent(this, QuizResult.class);
-                Bundle b = new Bundle();
-                b.putStringArrayList("odabrani_odgovori",odabrani_odgovori);
-                i.putExtras(b);
-                startActivity(i);
-                break;
+                if(odabraniOdgovor == null){
+                    Toast.makeText(this,"You have to choose an answer!", Toast.LENGTH_SHORT).show();
+                }else {
+                    if (odabrani_odgovori.size() >= 10)
+                        odabrani_odgovori.remove(odabrani_odgovori.size() - 1);
+                    odabrani_odgovori.add("" + odabraniOdgovor.getText().charAt(0));
+                    pitanja_odgovori.clearCheck();
+                    A.setChecked(false);
+                    B.setChecked(false);
+                    C.setChecked(false);
+                    Intent i = new Intent(this, QuizResult.class);
+                    Bundle b = new Bundle();
+                    b.putStringArrayList("odabrani_odgovori", odabrani_odgovori);
+                    b.putString("inputUsername", username);
+                    i.putExtras(b);
+                    startActivity(i);
+                    break;
+                }
             default:
                 Toast.makeText(this,"Morate odabrati nesto!", Toast.LENGTH_SHORT).show();
                 break;

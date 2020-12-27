@@ -8,7 +8,7 @@
     <string name="next_question">Next<br></br>question</string>
     <string name="previous_question">previous<br></br>question</string>
     <string name="final_question">Finish<br></br>quiz</string>
-    <string name="your_class_is">Your class is:</string>
+    <string name="your_class_is">, your class is:</string>
     <string name="close">Close the app</string>
     <string name="show_all_classes">Show all classes</string>
 </resources>

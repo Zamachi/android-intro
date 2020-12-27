@@ -24,6 +24,7 @@ public class QuizResult extends AppCompatActivity implements View.OnClickListene
     private static String urlKlase = "https://en.uesp.net/wiki/Morrowind:Classes";
     ArrayList<ClassesModel> klase = new ArrayList<>();
     ClassesModel odabranaKlasa = new ClassesModel();
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,8 @@ public class QuizResult extends AppCompatActivity implements View.OnClickListene
         Button show_all_classes = (Button) findViewById(R.id.show_all_classes);
         show_all_classes.setOnClickListener(this);
 
-
+        username = getIntent().getExtras().getString("inputUsername");
+        rezultati.setText(username+rezultati.getText().toString());
         WebView klasa_pogled= (WebView) (findViewById(R.id.klasa_pogled));
         klasa_pogled.getSettings().setJavaScriptEnabled(true);
         klasa_pogled.getSettings().setDomStorageEnabled(true);
