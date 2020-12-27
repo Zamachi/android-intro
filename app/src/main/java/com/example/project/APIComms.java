@@ -101,8 +101,6 @@ public class APIComms {
                     //resenje += rezultati.get(redni_broj++).toString();
                 }
                 pronadjiKlasu(odabrani_odgovori,rezultati, odabrana_klasa);
-                String result = odabrana_klasa.toString() + "\n\n" + Arrays.toString(odabrani_odgovori.toArray());
-                asd.setText(result);
                 super.onPostExecute(s);
             }
         };
