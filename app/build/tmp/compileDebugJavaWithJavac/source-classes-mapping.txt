@@ -1,0 +1,28 @@
+com/example/project/DBModel.java
+ com.example.project.DBModel
+com/example/project/ClassInspectionScreen.java
+ com.example.project.ClassInspectionScreen
+ com.example.project.ClassInspectionScreen$1
+com/example/project/BuildConfig.java
+ com.example.project.BuildConfig
+com/example/project/MainActivity.java
+ com.example.project.MainActivity
+com/example/project/QuestionModel.java
+ com.example.project.QuestionModel
+ com.example.project.QuestionModel$1
+com/example/project/ClassesModel.java
+ com.example.project.ClassesModel
+com/example/project/APIComms.java
+ com.example.project.APIComms
+ com.example.project.APIComms$1
+ com.example.project.APIComms$2
+ com.example.project.APIComms$3
+com/example/project/Database.java
+ com.example.project.Database
+com/example/project/QuestionsActivity.java
+ com.example.project.QuestionsActivity
+com/example/project/QuizResult.java
+ com.example.project.QuizResult
+ com.example.project.QuizResult$1
+com/example/project/RezultatiBaze.java
+ com.example.project.RezultatiBaze
