@@ -147,7 +147,6 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
                 if(odabraniOdgovor == null){
                     Toast.makeText(this,"You have to choose an answer!", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(this,odabraniOdgovor.getText(), Toast.LENGTH_SHORT).show();
                     posalji(1);
                 }
                 break;

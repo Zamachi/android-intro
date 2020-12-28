@@ -9,6 +9,6 @@
     <string name="previous_question">previous<br></br>question</string>
     <string name="final_question">Finish<br></br>quiz</string>
     <string name="your_class_is">, your class is:</string>
-    <string name="close">Close the app</string>
+    <string name="close">Show the class statistics</string>
     <string name="show_all_classes">Show all classes</string>
 </resources>

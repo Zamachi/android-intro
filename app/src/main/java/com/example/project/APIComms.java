@@ -2,6 +2,7 @@ package com.example.project;
 
 import android.os.AsyncTask;
 import android.text.Html;
+import android.util.ArraySet;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -14,6 +15,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,7 +54,7 @@ public class APIComms {
         task.execute(url);
     }
 
-    public static void getQClassAnswers(ArrayList<ClassesModel> rezultati, String url, TextView asd,ArrayList<String> odabrani_odgovori, ClassesModel odabrana_klasa){
+    public static void getQClassAnswers(ArrayList<ClassesModel> rezultati, String url, TextView asd,ArrayList<String> odabrani_odgovori, ClassesModel odabrana_klasa, Database baza_podataka){
         AsyncTask<String,Void,String> task = new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... strings) {
@@ -101,6 +106,7 @@ public class APIComms {
                     //resenje += rezultati.get(redni_broj++).toString();
                 }
                 pronadjiKlasu(odabrani_odgovori,rezultati, odabrana_klasa);
+                baza_podataka.updateResult(odabrana_klasa.getClass_name());
                 super.onPostExecute(s);
             }
         };
@@ -287,5 +293,51 @@ public class APIComms {
 
 
        return sadrzaj;
+    }
+
+    public static void fillDatabase(Database baza_podataka, String urlKlasa) {
+        AsyncTask<String,Void,String> task = new AsyncTask<String, Void, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+                String response="";
+                try {
+                    response = readFromURL(strings[0]);
+                    return parseHTML(response,1);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                return "Doslo je do neke neocekivane greske!";
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                Pattern pattern = Pattern.compile("[A-Z][a-z]+(Any|0-6|[0-7]){3}");
+                Pattern ime = Pattern.compile("[A-Z][a-z]+");
+
+                Matcher matcher = pattern.matcher(s);
+                Matcher matcherIme;
+                Map<String,String> imena_klasa = new HashMap<>();
+
+                String class_name, klasa;
+                while(matcher.find()){
+                    klasa = matcher.group(0);
+
+                    matcherIme = ime.matcher(klasa);
+                    matcherIme.find();
+
+                    class_name = matcherIme.group(0);
+                    imena_klasa.put(class_name,class_name);
+                    baza_podataka.addClassResult(imena_klasa.get(class_name),0);
+                }
+
+                super.onPostExecute(s);
+            }
+        };
+        task.execute(urlKlasa);
     }
 }

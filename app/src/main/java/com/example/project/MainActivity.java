@@ -29,6 +29,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static String url = "https://en.uesp.net//w/api.php?action=mobileview&format=json&page=Morrowind%3AClass_Quiz&sections=1-&prop=text%7Csections";
+    private static String urlKlasa = "https://en.uesp.net//w/api.php?action=mobileview&format=json&page=Morrowind%3AClass_Quiz&sections=1-&prop=text%7Csections";
     ArrayList<QuestionModel> pitanja = new ArrayList<>();
     TextView inputUsername;
 
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         APIComms.getQuizQuestions(this.pitanja,url);
 
+        Database baza_podataka = new Database(this);
+        APIComms.fillDatabase(baza_podataka,urlKlasa);
     }
 
     @Override

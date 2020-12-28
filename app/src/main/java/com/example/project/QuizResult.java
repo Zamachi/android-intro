@@ -12,8 +12,6 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class QuizResult extends AppCompatActivity implements View.OnClickListener{
@@ -36,9 +34,9 @@ public class QuizResult extends AppCompatActivity implements View.OnClickListene
     private void initializeComponents() {
         rezultati = (TextView)findViewById(R.id.rezultati);
         odabrani_odgovori = getIntent().getExtras().getStringArrayList("odabrani_odgovori");
-        APIComms.getQClassAnswers(klase,url,rezultati,odabrani_odgovori,odabranaKlasa);
+        APIComms.getQClassAnswers(klase,url,rezultati,odabrani_odgovori,odabranaKlasa,new Database(this));
 
-        Button close = (Button) findViewById(R.id.close);
+        Button close = (Button) findViewById(R.id.show_statistic);
         close.setOnClickListener(this);
         Button show_all_classes = (Button) findViewById(R.id.show_all_classes);
         show_all_classes.setOnClickListener(this);
@@ -69,8 +67,8 @@ public class QuizResult extends AppCompatActivity implements View.OnClickListene
             case R.id.show_all_classes:
                 startActivity(new Intent(this, ClassInspectionScreen.class));
                 break;
-            case R.id.close:
-                finish();
+            case R.id.show_statistic:
+                startActivity(new Intent(this, RezultatiBaze.class));
                 break;
         }
     }
