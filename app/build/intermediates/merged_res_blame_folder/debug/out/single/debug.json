@@ -68,12 +68,12 @@
         "source": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
-    },
-    {
         "merged": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\build\\intermediates\\res\\merged\\debug\\layout-land_activity_quiz_result.xml.flat",
         "source": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\src\\main\\res\\layout-land\\activity_quiz_result.xml"
+    },
+    {
+        "merged": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
     },
     {
         "merged": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_launcher_background.xml.flat",
@@ -92,20 +92,12 @@
         "source": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
-    },
-    {
         "merged": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\build\\intermediates\\res\\merged\\debug\\layout_list_item.xml.flat",
         "source": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\src\\main\\res\\layout\\list_item.xml"
     },
     {
-        "merged": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
+        "merged": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
     },
     {
         "merged": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_questions.xml.flat",
@@ -114,5 +106,13 @@
     {
         "merged": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_quiz_result.xml.flat",
         "source": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\src\\main\\res\\layout\\activity_quiz_result.xml"
+    },
+    {
+        "merged": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\Zamachi\\AndroidStudioProjects\\Android_project\\android-intro\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
     }
 ]
